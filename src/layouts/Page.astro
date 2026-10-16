@@ -1,0 +1,78 @@
+---
+import '../styles/global.css';
+import Sidebar from '../components/Sidebar.astro';
+import { config, href, type PageKey } from '../lib/config';
+
+interface Props { page: PageKey; title?: string }
+const { page, title } = Astro.props;
+const { site, profile } = config;
+const meta = config.pages[page];
+const fullTitle = page === 'home' ? site.title : `${title ?? meta.title} · ${site.title}`;
+const canonical = new URL(Astro.url.pathname, site.url).href;
+const cover = profile.cover;
+const coverStyle = cover?.image
+  ? `background-image:url('${cover.image}')`
+  : cover?.gradient?.length
+    ? `background:linear-gradient(120deg,${cover.gradient.join(',')})`
+    : undefined;
+---
+<!doctype html>
+<html lang={site.language} data-theme={site.theme} data-accent={site.accent}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={site.description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" href={href('favicon.svg')} type="image/svg+xml" />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={site.description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonical} />
+    <meta name="twitter:card" content="summary" />
+    <script is:inline define:vars={{ def: site.theme }}>
+      try {
+        const saved = localStorage.getItem('theme');
+        const pref = saved || def;
+        const dark = pref === 'dark' || (pref === 'system' && matchMedia('(prefers-color-scheme: dark)').matches);
+        document.documentElement.dataset.mode = dark ? 'dark' : 'light';
+      } catch {
+        document.documentElement.dataset.mode = 'light';
+      }
+    </script>
+  </head>
+  <body>
+    <div class="app">
+      <Sidebar current={page} />
+      <div class="main">
+        <button class="menu-btn" id="menu-btn" type="button" aria-label="Open menu" aria-controls="sidebar">☰</button>
+        <div class="cover" style={coverStyle} role="presentation"></div>
+        <main class="page">
+          <div class="page-icon" aria-hidden="true">{page === 'home' ? (profile.icon ?? meta.icon) : meta.icon}</div>
+          <slot />
+          <footer class="footer">{site.footer ?? `© ${new Date().getFullYear()} ${profile.name}`}</footer>
+        </main>
+      </div>
+    </div>
+    <script>
+      const root = document.documentElement;
+      document.getElementById('theme-toggle')?.addEventListener('click', () => {
+        const next = root.dataset.mode === 'dark' ? 'light' : 'dark';
+        root.dataset.mode = next;
+        try { localStorage.setItem('theme', next); } catch {}
+      });
+      const sb = document.getElementById('sidebar');
+      document.getElementById('menu-btn')?.addEventListener('click', () => sb?.classList.toggle('open'));
+      document.querySelector('.main')?.addEventListener('click', (e) => {
+        if (!(e.target as HTMLElement).closest?.('#menu-btn')) sb?.classList.remove('open');
+      });
+      document.querySelectorAll<HTMLButtonElement>('[data-view]').forEach((b) =>
+        b.addEventListener('click', () => {
+          const v = b.dataset.view!;
+          document.querySelectorAll('[data-view]').forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
+          document.querySelectorAll<HTMLElement>('[data-pane]').forEach((p) => (p.hidden = p.dataset.pane !== v));
+        })
+      );
+    </script>
+  </body>
+</html>

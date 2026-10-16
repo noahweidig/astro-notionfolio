@@ -1,0 +1,146 @@
+# ─────────────────────────────────────────────────────────────
+#  portfolio.config.yaml
+#  Everything on the site comes from this file. Edit it, save,
+#  and the site rebuilds. No other file needs to change.
+#
+#  Tips
+#  - Indentation matters (2 spaces, no tabs).
+#  - Delete any section or field you don't want; it will be hidden.
+#  - Dates are free text. "2024", "2024-03" and "Mar 2024" all work.
+#  - Icons are emoji.
+# ─────────────────────────────────────────────────────────────
+
+site:
+  title: John Smith
+  description: Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+  url: https://example.github.io # your final site URL
+  base: / # use /repo-name/ for GitHub Pages project sites
+  language: en
+  theme: system # light | dark | system
+  accent: blue # blue | red | green | orange | purple | pink | gray
+  footer: Lorem ipsum dolor sit amet.
+
+profile:
+  name: John Smith
+  icon: 👋
+  cover: # use ONE of: gradient, image
+    gradient: ["#e3d9f7", "#cfe3f8", "#d5f1e4"]
+    # image: https://images.unsplash.com/photo-0000000000
+  headline: Lorem ipsum dolor sit amet
+  email: john.smith@example.com
+  location: Springfield, USA
+  # Shown as the property table under the title. Add or remove rows freely.
+  properties:
+    - { icon: 💼, label: Role, value: Senior Lorem Engineer }
+    - { icon: 🏢, label: Company, value: Ipsum Corp }
+    - { icon: 📍, label: Location, value: "Springfield, USA" }
+    - { icon: ✉️, label: Email, value: john.smith@example.com, link: "mailto:john.smith@example.com" }
+    - { icon: 🟢, label: Status, value: Open to work, tag: green }
+  about:
+    - Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+    - Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse.
+  callout:
+    icon: 💡
+    text: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Excepteur sint occaecat cupidatat non proident.
+
+# Sidebar order. Remove a key to hide that page.
+# Available: home, projects, experience, writing
+nav: [home, projects, experience, writing]
+
+pages:
+  home: { icon: 🏠, title: Home }
+  projects: { icon: 🚀, title: Projects, intro: Lorem ipsum dolor sit amet, consectetur adipiscing elit. }
+  experience: { icon: 💼, title: Experience, intro: Lorem ipsum dolor sit amet, consectetur adipiscing elit. }
+  writing: { icon: ✍️, title: Writing, intro: Lorem ipsum dolor sit amet, consectetur adipiscing elit. }
+
+links:
+  - { icon: 🐙, label: GitHub, url: "https://github.com/johnsmith", description: Lorem ipsum dolor sit amet }
+  - { icon: 💬, label: LinkedIn, url: "https://linkedin.com/in/johnsmith", description: Consectetur adipiscing elit }
+  - { icon: 🐦, label: Twitter, url: "https://twitter.com/johnsmith", description: Sed do eiusmod tempor }
+  - { icon: 📄, label: Résumé, url: "/resume.pdf", description: Ut enim ad minim veniam }
+
+skills:
+  - name: Lorem
+    items: [Ipsum, Dolor, Consectetur, Adipiscing]
+  - name: Sit Amet
+    items: [Eiusmod, Tempor, Incididunt, Labore]
+  - name: Magna Aliqua
+    items: [Quis, Nostrud, Exercitation, Ullamco]
+
+experience:
+  - role: Senior Lorem Engineer
+    company: Ipsum Corp
+    url: https://example.com
+    location: Springfield, USA
+    start: 2022-01
+    end: Present
+    summary: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.
+    highlights:
+      - Lorem ipsum dolor sit amet consectetur adipiscing elit.
+      - Sed do eiusmod tempor incididunt ut labore et dolore magna.
+      - Ut enim ad minim veniam quis nostrud exercitation.
+  - role: Lorem Engineer
+    company: Dolor Labs
+    url: https://example.com
+    location: Remote
+    start: 2019-06
+    end: 2021-12
+    summary: Duis aute irure dolor in reprehenderit in voluptate velit esse cillum.
+    highlights:
+      - Excepteur sint occaecat cupidatat non proident.
+      - Sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+education:
+  - degree: B.S. Lorem Ipsum
+    school: University of Dolor
+    start: 2015
+    end: 2019
+    summary: Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+
+projects:
+  - name: Lorem Dashboard
+    icon: 📊
+    description: Lorem ipsum dolor sit amet, consectetur adipiscing elit sed do eiusmod.
+    status: Live # Live | In progress | Archived (any text works)
+    date: 2024-05
+    tags: [Lorem, Ipsum]
+    url: https://example.com
+    repo: https://github.com/johnsmith/lorem-dashboard
+  - name: Ipsum CLI
+    icon: ⌨️
+    description: Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.
+    status: Live
+    date: 2023-11
+    tags: [Dolor, Tooling]
+    repo: https://github.com/johnsmith/ipsum-cli
+  - name: Dolor Mobile App
+    icon: 📱
+    description: Duis aute irure dolor in reprehenderit in voluptate velit esse.
+    status: In progress
+    date: 2024-09
+    tags: [Sit, Amet]
+    url: https://example.com
+  - name: Amet Design System
+    icon: 🎨
+    description: Excepteur sint occaecat cupidatat non proident sunt in culpa.
+    status: Archived
+    date: 2022-02
+    tags: [Consectetur]
+    repo: https://github.com/johnsmith/amet-design
+
+writing:
+  - title: Lorem ipsum dolor sit amet
+    url: https://example.com/post-1
+    date: 2024-08-12
+    summary: Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.
+    tags: [Lorem]
+  - title: Ut enim ad minim veniam
+    url: https://example.com/post-2
+    date: 2024-03-02
+    summary: Quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo.
+    tags: [Ipsum, Dolor]
+  - title: Duis aute irure dolor
+    url: https://example.com/post-3
+    date: 2023-10-21
+    summary: In reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla.
+    tags: [Dolor]

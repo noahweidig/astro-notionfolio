@@ -1,0 +1,34 @@
+---
+import Page from '../layouts/Page.astro';
+import { config, range } from '../lib/config';
+const { experience, education, pages } = config;
+---
+<Page page="experience">
+  <h1 class="title">{pages.experience.title}</h1>
+  {pages.experience.intro && <p class="subtitle">{pages.experience.intro}</p>}
+
+  {experience.map((j) => (
+    <section class="entry">
+      <div class="entry-head">
+        <h3>
+          {j.role} <span class="dim">@</span>
+          {j.url ? <a href={j.url} target="_blank" rel="noopener noreferrer">{j.company}</a> : j.company}
+        </h3>
+        <div class="entry-meta">{[range(j.start, j.end), j.location].filter(Boolean).join(' · ')}</div>
+      </div>
+      {j.summary && <p>{j.summary}</p>}
+      {j.highlights?.length ? <ul>{j.highlights.map((h) => <li>{h}</li>)}</ul> : null}
+    </section>
+  ))}
+
+  {education.length > 0 && <h2>Education</h2>}
+  {education.map((s) => (
+    <section class="entry">
+      <div class="entry-head">
+        <h3>{s.degree} <span class="dim">·</span> {s.school}</h3>
+        <div class="entry-meta">{range(s.start, s.end)}</div>
+      </div>
+      {s.summary && <p>{s.summary}</p>}
+    </section>
+  ))}
+</Page>

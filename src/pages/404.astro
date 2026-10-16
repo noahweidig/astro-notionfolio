@@ -1,0 +1,8 @@
+---
+import Page from '../layouts/Page.astro';
+import { href } from '../lib/config';
+---
+<Page page="home" title="Not found">
+  <h1 class="title">Page not found</h1>
+  <p>Lorem ipsum, nothing here. <a href={href()}>Go home</a>.</p>
+</Page>
