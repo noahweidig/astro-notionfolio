@@ -1,0 +1,57 @@
+---
+import Page from '../layouts/Page.astro';
+import Tag from '../components/Tag.astro';
+import { config, fmtDate } from '../lib/config';
+const { projects, pages } = config;
+const sorted = [...projects].sort((a, b) => (b.date ?? '').localeCompare(a.date ?? ''));
+---
+<Page page="projects">
+  <h1 class="title">{pages.projects.title}</h1>
+  {pages.projects.intro && <p class="subtitle">{pages.projects.intro}</p>}
+
+  <div class="views" role="group" aria-label="View">
+    <button type="button" data-view="gallery" aria-pressed="true">▦ Gallery</button>
+    <button type="button" data-view="table" aria-pressed="false">☰ Table</button>
+  </div>
+
+  <div class="gallery" data-pane="gallery">
+    {sorted.map((p) => (
+      <article class="card">
+        <div class="card-icon" aria-hidden="true">{p.icon ?? '📁'}</div>
+        <h3>{p.name}</h3>
+        {p.description && <p>{p.description}</p>}
+        <div class="card-tags">
+          {p.status && <Tag text={p.status} />}
+          {p.tags?.map((t) => <Tag text={t} />)}
+        </div>
+        <div class="card-links">
+          {p.url && <a href={p.url} target="_blank" rel="noopener noreferrer">Visit ↗</a>}
+          {p.repo && <a href={p.repo} target="_blank" rel="noopener noreferrer">Code ↗</a>}
+        </div>
+      </article>
+    ))}
+  </div>
+
+  <div class="table-wrap" data-pane="table" hidden>
+    <table>
+      <thead>
+        <tr><th>Name</th><th>Status</th><th>Tags</th><th>Date</th><th>Links</th></tr>
+      </thead>
+      <tbody>
+        {sorted.map((p) => (
+          <tr>
+            <td><span aria-hidden="true">{p.icon ?? '📁'}</span> {p.name}</td>
+            <td>{p.status && <Tag text={p.status} />}</td>
+            <td>{p.tags?.map((t) => <Tag text={t} />)}</td>
+            <td class="nowrap">{fmtDate(p.date)}</td>
+            <td class="nowrap">
+              {p.url && <a href={p.url} target="_blank" rel="noopener noreferrer">Visit</a>}
+              {p.url && p.repo && ' · '}
+              {p.repo && <a href={p.repo} target="_blank" rel="noopener noreferrer">Code</a>}
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+</Page>

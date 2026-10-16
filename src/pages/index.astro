@@ -1,0 +1,65 @@
+---
+import Page from '../layouts/Page.astro';
+import Tag from '../components/Tag.astro';
+import { config } from '../lib/config';
+const { profile, skills, links } = config;
+---
+<Page page="home">
+  <h1 class="title">{profile.name}</h1>
+  {profile.headline && <p class="subtitle">{profile.headline}</p>}
+
+  {profile.properties.length > 0 && (
+    <dl class="props">
+      {profile.properties.map((p) => (
+        <div class="prop">
+          <dt><span aria-hidden="true">{p.icon}</span> {p.label}</dt>
+          <dd>
+            {p.tag ? <Tag text={p.value} color={p.tag} />
+              : p.link ? <a href={p.link}>{p.value}</a>
+              : p.value}
+          </dd>
+        </div>
+      ))}
+    </dl>
+  )}
+
+  <hr />
+
+  {profile.about.map((para) => <p>{para}</p>)}
+
+  {profile.callout && (
+    <div class="callout">
+      <span class="callout-icon" aria-hidden="true">{profile.callout.icon ?? '💡'}</span>
+      <div>{profile.callout.text}</div>
+    </div>
+  )}
+
+  {skills.length > 0 && (
+    <>
+      <h2>Skills</h2>
+      {skills.map((g) => (
+        <details class="toggle" open>
+          <summary>{g.name}</summary>
+          <div class="toggle-body">
+            {g.items.map((i) => <Tag text={i} />)}
+          </div>
+        </details>
+      ))}
+    </>
+  )}
+
+  {links.length > 0 && (
+    <>
+      <h2>Find me online</h2>
+      <div class="bookmarks">
+        {links.map((l) => (
+          <a class="bookmark" href={l.url} target="_blank" rel="noopener noreferrer">
+            <div class="bm-title"><span aria-hidden="true">{l.icon ?? '🔗'}</span> {l.label}</div>
+            {l.description && <div class="bm-desc">{l.description}</div>}
+            <div class="bm-url">{l.url}</div>
+          </a>
+        ))}
+      </div>
+    </>
+  )}
+</Page>

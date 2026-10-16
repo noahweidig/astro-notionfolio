@@ -1,0 +1,26 @@
+---
+import Page from '../layouts/Page.astro';
+import Tag from '../components/Tag.astro';
+import { config, fmtDate } from '../lib/config';
+const { writing, pages } = config;
+const sorted = [...writing].sort((a, b) => (b.date ?? '').localeCompare(a.date ?? ''));
+---
+<Page page="writing">
+  <h1 class="title">{pages.writing.title}</h1>
+  {pages.writing.intro && <p class="subtitle">{pages.writing.intro}</p>}
+
+  <ul class="posts">
+    {sorted.map((p) => (
+      <li>
+        <a class="post" href={p.url} target="_blank" rel="noopener noreferrer">
+          <div class="post-title">📄 {p.title}</div>
+          {p.summary && <div class="post-sum">{p.summary}</div>}
+          <div class="post-meta">
+            {p.date && <span>{fmtDate(p.date)}</span>}
+            {p.tags?.map((t) => <Tag text={t} />)}
+          </div>
+        </a>
+      </li>
+    ))}
+  </ul>
+</Page>

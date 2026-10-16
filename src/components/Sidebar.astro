@@ -1,0 +1,32 @@
+---
+import { config, pageHref, href } from '../lib/config';
+interface Props { current: string }
+const { current } = Astro.props;
+const { profile } = config;
+---
+<aside class="sidebar" id="sidebar">
+  <a class="workspace" href={href()}>
+    <span class="avatar">{profile.icon ?? profile.name[0]}</span>
+    <span class="ws-name">{profile.name}</span>
+  </a>
+  <nav aria-label="Pages">
+    <div class="side-label">Pages</div>
+    {config.nav.map((key) => (
+      <a href={pageHref(key)} class:list={['side-item', { active: key === current }]} aria-current={key === current ? 'page' : undefined}>
+        <span class="side-icon">{config.pages[key].icon}</span>
+        <span>{config.pages[key].title}</span>
+      </a>
+    ))}
+    {config.links.length > 0 && <div class="side-label">Links</div>}
+    {config.links.map((l) => (
+      <a href={l.url} class="side-item" target="_blank" rel="noopener noreferrer">
+        <span class="side-icon">{l.icon ?? '🔗'}</span>
+        <span>{l.label}</span>
+        <span class="side-arrow" aria-hidden="true">↗</span>
+      </a>
+    ))}
+  </nav>
+  <button class="side-item theme-btn" id="theme-toggle" type="button" aria-label="Toggle dark mode">
+    <span class="side-icon" id="theme-icon">🌓</span><span>Toggle theme</span>
+  </button>
+</aside>

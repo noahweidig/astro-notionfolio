@@ -1,0 +1,6 @@
+---
+import { tagColor, type Accent } from '../lib/config';
+interface Props { text: string; color?: Accent }
+const { text, color = tagColor(text) } = Astro.props;
+---
+<span class={`tag tag-${color}`}>{text}</span>
