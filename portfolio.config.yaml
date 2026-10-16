@@ -13,8 +13,8 @@
 site:
   title: John Smith
   description: Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-  url: http://noahweidig.com/astro-notionfolio/ # your final site URL
-  base: / # use /repo-name/ for GitHub Pages project sites
+  url: https://noahweidig.com # site origin only, no path
+  base: /astro-notionfolio/ # use / for a user/custom-domain root site
   language: en
   theme: system # light | dark | system
   accent: blue # blue | red | green | orange | purple | pink | gray
