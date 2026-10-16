@@ -13,7 +13,7 @@
 site:
   title: John Smith
   description: Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-  url: https://example.github.io # your final site URL
+  url: http://noahweidig.com/astro-notionfolio/ # your final site URL
   base: / # use /repo-name/ for GitHub Pages project sites
   language: en
   theme: system # light | dark | system
